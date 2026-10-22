@@ -1,0 +1,263 @@
+@import 'tailwindcss';
+
+/* Layout: "Plano técnico" — cada sección es una lámina de ingeniería (marco doble, papel
+   milimetrado, cajetín inferior). Tinta azul marino, correcciones en rojo (redline).
+   Modo oscuro = cianotipo: papel azul y trazo claro. */
+:root {
+  --bg: #e9ede7;
+  --paper: #f6f8f4;
+  --surface: #ffffff;
+  --surface-2: #eef2f0;
+  --line: #c5d0dc;
+  --grid: rgba(27, 58, 92, 0.07);
+  --grid-fine: rgba(27, 58, 92, 0.035);
+  --fg: #1b3a5c;
+  --muted: #4e6580;
+  --accent: #1b3a5c;
+  --accent-strong: #102841;
+  --accent-fg: #f6f8f4;
+  --accent-soft: #e2e9f1;
+  --redline: #c2412d;
+
+  --ok: #2f7d4f;
+  --ok-soft: #e3f1e7;
+  --warn: #8f540c;
+  --warn-soft: #fff1d9;
+  --bad: #b3261e;
+  --bad-soft: #fbe5e1;
+
+  --heat-low: #dcebdd;
+  --heat-mid: #f6e3b8;
+  --heat-high: #f3cfc6;
+
+  /* Series de la curva S (validadas: banda de luminosidad, croma, CVD y contraste) */
+  --s-pv: #5b63c8;
+  --s-ev: #1f8f7a;
+  --s-ac: #d0592e;
+
+  --font-display: 'Archivo Narrow', 'Arial Narrow', system-ui, sans-serif;
+  --font-body: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-data: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0a1a30;
+    --paper: #0f2a4a;
+    --surface: #133256;
+    --surface-2: #17395f;
+    --line: #3d6290;
+    --grid: rgba(214, 230, 248, 0.08);
+    --grid-fine: rgba(214, 230, 248, 0.035);
+    --fg: #e4eef9;
+    --muted: #a9c0dc;
+    --accent: #e4eef9;
+    --accent-strong: #ffffff;
+    --accent-fg: #0f2a4a;
+    --accent-soft: #21456f;
+    --redline: #ff9478;
+    --ok: #7ad9a0;
+    --ok-soft: #173f35;
+    --warn: #f7c46a;
+    --warn-soft: #3d3420;
+    --bad: #ff8f86;
+    --bad-soft: #47243a;
+    --heat-low: #1d4a48;
+    --heat-mid: #4d4a2c;
+    --heat-high: #5a3044;
+    --s-pv: #8187e8;
+    --s-ev: #279c84;
+    --s-ac: #e06c3c;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #0a1a30;
+  --paper: #0f2a4a;
+  --surface: #133256;
+  --surface-2: #17395f;
+  --line: #3d6290;
+  --grid: rgba(214, 230, 248, 0.08);
+  --grid-fine: rgba(214, 230, 248, 0.035);
+  --fg: #e4eef9;
+  --muted: #a9c0dc;
+  --accent: #e4eef9;
+  --accent-strong: #ffffff;
+  --accent-fg: #0f2a4a;
+  --accent-soft: #21456f;
+  --redline: #ff9478;
+  --ok: #7ad9a0;
+  --ok-soft: #173f35;
+  --warn: #f7c46a;
+  --warn-soft: #3d3420;
+  --bad: #ff8f86;
+  --bad-soft: #47243a;
+  --heat-low: #1d4a48;
+  --heat-mid: #4d4a2c;
+  --heat-high: #5a3044;
+  --s-pv: #8187e8;
+  --s-ev: #279c84;
+  --s-ac: #e06c3c;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-redline: var(--redline);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-bad: var(--bad);
+  --color-bad-soft: var(--bad-soft);
+  --color-heat-low: var(--heat-low);
+  --color-heat-mid: var(--heat-mid);
+  --color-heat-high: var(--heat-high);
+  --color-s-pv: var(--s-pv);
+  --color-s-ev: var(--s-ev);
+  --color-s-ac: var(--s-ac);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-data);
+  /* Dibujo técnico: esquinas rectas. Los círculos (rounded-full) se mantienen. */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+.eyebrow {
+  font-family: var(--font-data);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Lámina: papel milimetrado con marco doble */
+.hoja {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    linear-gradient(var(--grid-fine) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-fine) 1px, transparent 1px);
+  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+  border: 2px solid var(--fg);
+  outline: 1px solid var(--fg);
+  outline-offset: 5px;
+}
+
+/* Timbre de validación */
+.sello {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 7px;
+  border: 1.5px solid currentColor;
+  font-family: var(--font-data);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Campos de formulario y celdas editables de planilla */
+.field {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-bottom: 1.5px solid var(--fg);
+  background: var(--surface);
+  color: var(--fg);
+  padding: 7px 9px;
+  font: inherit;
+  line-height: 1.35;
+}
+.field:focus {
+  outline: 2px solid var(--redline);
+  outline-offset: -1px;
+}
+.cell {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--fg);
+  padding: 4px 6px;
+  font: inherit;
+  resize: vertical;
+}
+.cell:hover {
+  border-color: var(--line);
+}
+.cell:focus {
+  outline: 2px solid var(--redline);
+  outline-offset: -1px;
+  background: var(--surface);
+}
+
+:focus-visible {
+  outline: 2px solid var(--redline);
+  outline-offset: 2px;
+}
+
+input[type='range'] {
+  accent-color: var(--fg);
+}
+
+/* Gutter lateral compatible con safe-area (contrato de Artifact) */
+.gutter {
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (min-width: 1024px) {
+  .gutter {
+    padding-left: max(28px, env(safe-area-inset-left, 0px));
+    padding-right: max(28px, env(safe-area-inset-right, 0px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

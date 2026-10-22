@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# Node
+node_modules/
+dist/
+
+# Excel lock files
+~$*.xlsx
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Base de datos local de proyectos
+*.db
+*.db-journal
+
+# Configuración local del entorno de desarrollo (Claude Code)
+.claude/
+
+# Plantillas Excel originales (de terceros): quedan solo en local.
+# El repo incluye plantillas propias en backend/templates_base/.
+backend/templates/*.xlsx
